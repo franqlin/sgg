@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security 
 		http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 		
-  	<security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
+    <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled" />
 		
-	<security:http auto-config="true">
-		<security:form-login login-page="/login.jsp" default-target-url="/login/" />
-       <security:intercept-url pattern="/login/**" access="ROLE_USER" />
-		<security:logout logout-url="/logout" />
-	</security:http>
+    <security:http auto-config="true">
+        <security:form-login login-page="/login.jsp" default-target-url="/login/" />
+        <security:intercept-url pattern="/login/**"  access="ROLE_USER" />
+        <!--security:intercept-url pattern="/geladeira/**" access="ROLE_USER" /-->
+        <security:logout logout-url="/logout" />
+    </security:http>
 
-	<bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder" />
+    <bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder" />
 
-	<security:authentication-manager >
-		<security:authentication-provider user-service-ref="meuService">
-			<security:password-encoder hash="sha">
-				<security:salt-source system-wide="salt" />
-			</security:password-encoder>
-		</security:authentication-provider>
-	</security:authentication-manager>
+    <security:authentication-manager >
+        <security:authentication-provider user-service-ref="meuService">
+            <security:password-encoder hash="sha">
+                <security:salt-source system-wide="salt" />
+            </security:password-encoder>
+        </security:authentication-provider>
+    </security:authentication-manager>
 	
-	<bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" /> 
+    <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" /> 
 	
 	
-	<bean id="meuService" 
-		class="org.shortlets.security.auth.UserDaoService" 
-		autowire="constructor" />
+    <bean id="meuService" 
+              class="org.shortlets.security.auth.UserDaoService" 
+              autowire="constructor" />
 		
-	<bean class="org.shortlets.dao.UsuarioDao" id="usuarioDao" />
+    <bean class="org.shortlets.dao.UsuarioDao" id="usuarioDao" />
 	
 </beans>

@@ -25,7 +25,6 @@
     <div class="container">
 
       <form name='f' class="form-signin" action='${pageContext.request.contextPath}/j_spring_security_check'  method='POST'>
-          <h4 class="form-signin-heading">SGG</h4>
         <div class="login-wrap">
             <input type="text" id="j_username" name="j_username" class="form-control" placeholder="Usu&aacute;rio" autofocus>
             <input type="password"  name='j_password'  class="form-control" placeholder="Senha">
